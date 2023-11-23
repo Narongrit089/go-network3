@@ -24,6 +24,7 @@ func handleConnection(conn net.Conn) {
 		// Print received data
 		fmt.Printf("Received message: %s", buffer[:n]) // :n is a slice operator that returns a slice of the first n bytes of the buffer
 
+		fmt.Printf("Received message: %v", buffer[:n]) // :n is a slice operator that returns a slice of the first n bytes of the buffer
 		// Send a response back to the client
 		response := "Message received successfully\n"
 		conn.Write([]byte(response))
