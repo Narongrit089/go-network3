@@ -29,3 +29,33 @@ func handleConnection(conn net.Conn) {
 		conn.Write([]byte(response))
 	}
 }
+
+func main() {
+	//Listen for incoming connections
+	listener, err := net.Listen("tcp", ":5000")
+	if err != nil {
+		fmt.Println("Error listening:", err)
+		return
+	}
+
+	//Close the listenner when the application
+	defer listener.Close()
+
+	fmt.Println("Server is listening on port 5000")
+
+	//Listen for an incoming connection
+
+	for {
+
+		//Accept() block until a connection is made
+		conn, err := listener.Accept() //Accept it three-way handshark
+		if err != nil {
+			fmt.Println("Error accepting connection:", err)
+			continue //continue to next
+		}
+
+		fmt.Println("New connection established")
+
+		go handleConnection(conn)
+	}
+}
